@@ -16,4 +16,4 @@ async function General() {
   Home(pokemones);
 }
 
-General()
+//General()
