@@ -4,11 +4,16 @@ async function Detalle(parametro){
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${parametro}`);
         const data = await res.json();
 
+        let tipoPoke = "";
+        for (let i = 0; i < data.types.length; i++) {
+            tipoPoke += `<span>${data.types[i].type.name}</span> `;
+        }
         const detalle = `
     <section class="c-detalle">
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png" alt="${data.name}" height="120" width="auto">
         <p>${data.name}</p>
         <p>${data.id}</p>
+        <p>${tipoPoke}</p>
         <p>Altura: ${data.height / 10} m / Peso: ${data.weight / 10} kg</p>
         <p>hp: ${data.stats[0].base_stat}</p>
         <p>Velocidad: ${data.stats[5].base_stat}</p>
@@ -20,5 +25,3 @@ async function Detalle(parametro){
 
     root.innerHTML = detalle;
 }
-
-Detalle(1)
